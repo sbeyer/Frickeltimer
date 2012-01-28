@@ -1,0 +1,57 @@
+<title>Frickeltimer</title>
+<form name="frickel">
+<input type="text" style="font-size: 50pt; text-align: center;" size="2" name="timer" />
+<a href="#" onClick="stop(); start(5*60)">5m</a>
+<a href="#" onClick="stop(); start(3*60)">3m</a>
+<a href="#" onClick="stop(); start(60)">1m</a>
+<a href="#" onClick="stop();">stop</a>
+</form> 
+<script> 
+<!-- 
+window.statusbar.enable = false;
+window.titlebar.enable = false;
+window.locationbar.enable = false;
+
+var seconds = 0; 
+var cnt = 10;
+var id = null;
+
+function countdown()
+{
+	var sec = seconds % 60;
+	var min = (seconds-sec)/60;
+	if (sec < 10) {
+		sec = "0"+sec;
+	}
+	document.frickel.timer.value = min+":"+sec;
+
+	if (seconds > 0) {
+		if (cnt == 0) {
+			seconds -= 1;
+			cnt = 10;
+		} else {
+			cnt -= 1;
+		}
+		id = setTimeout("countdown()",100);
+	} else {
+		id = null;
+	}
+} 
+
+function stop() {
+	if (id != null) {
+		clearTimeout(id)
+	}
+	seconds = 0;
+	document.frickel.timer.value = "-:--";
+}
+
+function start(s) {
+	seconds = s;
+	cnt = 10;
+	countdown();
+}
+
+stop();
+--> 
+</script> 
