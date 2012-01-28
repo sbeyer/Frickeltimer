@@ -1,0 +1,49 @@
+== What is this? ==
+
+A simple JavaScript-based Countdown timer.
+
+
+== Why is this? ==
+
+I (Stephan Beyer) needed a simple countdown timer (for Linux).
+I needed it fast.
+I did not find one.
+This piece of code is the consequence.
+
+
+== License? ==
+
+You may redistribute and use the files ("software") freely, with or
+without modification.
+
+THIS SOFTWARE IS PROVIDED BY STEPHAN BEYER ``AS IS'' AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL STEPHAN BEYER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The views and conclusions contained in the software and documentation
+are those of the authors and should not be interpreted as representing
+official policies, either expressed or implied, of Stephan Beyer.
+
+Stephan Beyer appreciates forks of and contributions to this software,
+e.g., via mail or github.
+
+
+== Where did I get it from? ==
+
+	https://github.com/sbeyer/Frickeltimer
+
+
+== What is the name all about? ==
+
+"Frickel" is the stem of the German verb "frickeln". Any questions? ;)
+
+
+ -- Stephan Beyer <s-beyer at gmx.net>
