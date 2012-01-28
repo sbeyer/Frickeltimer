@@ -1,18 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html version="-//W3C//DTD XHTML 1.1//EN"
+ xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd">
+<head>
 <title>Frickeltimer</title>
-<form name="frickel">
-<input type="text" style="font-size: 50pt; text-align: center;" size="2" name="timer" />
-<a href="#" onClick="stop(); start(5*60)">5m</a>
-<a href="#" onClick="stop(); start(3*60)">3m</a>
-<a href="#" onClick="stop(); start(60)">1m</a>
-<a href="#" onClick="stop();">stop</a>
-</form> 
-<script> 
-<!-- 
-window.statusbar.enable = false;
-window.titlebar.enable = false;
-window.locationbar.enable = false;
+<style type="text/css">/* <![CDATA[ */
+body {
+	color: #000;
+	background-color: #fff;
+}
 
-var seconds = 0; 
+a {
+	text-decoration: none;
+	color: #00f;
+}
+
+div#frickeltimer {
+	font-size: 50pt;
+	text-align: center;
+	width: 3em;
+	border: #aaa 2px solid;
+	float: left;
+	margin: 10px 50px 10px 10px;
+}
+/* ]]> */</style>
+</head>
+<body>
+<div id="frickeltimer">
+ -:--
+</div>
+<p>
+<a href="#" onclick="stop(); start(5*60)">5m</a>
+<a href="#" onclick="stop(); start(3*60)">3m</a>
+<a href="#" onclick="stop(); start(60)">1m</a>
+<a href="#" onclick="stop();">stop</a>
+</p>
+<script type="text/javascript">/* <![CDATA[ */
+var seconds = 0;
 var cnt = 10;
 var id = null;
 
@@ -23,7 +50,7 @@ function countdown()
 	if (sec < 10) {
 		sec = "0"+sec;
 	}
-	document.frickel.timer.value = min+":"+sec;
+	document.getElementById('frickeltimer').firstChild.nodeValue = min+":"+sec;
 
 	if (seconds > 0) {
 		if (cnt == 0) {
@@ -36,14 +63,14 @@ function countdown()
 	} else {
 		id = null;
 	}
-} 
+}
 
 function stop() {
 	if (id != null) {
 		clearTimeout(id)
 	}
 	seconds = 0;
-	document.frickel.timer.value = "-:--";
+	document.getElementById('frickeltimer').firstChild.nodeValue = "-:--";
 }
 
 function start(s) {
@@ -52,6 +79,6 @@ function start(s) {
 	countdown();
 }
 
-stop();
---> 
-</script> 
+/* ]]> */</script>
+</body>
+</html>

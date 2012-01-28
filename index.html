@@ -1,3 +1,20 @@
-<script>
-window.open("countdown.html", "Frickeltimer", "toolar=0,location=0,menubar=0,status=0,scrollbars=0,width=360,height=120");
-</script>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html version="-//W3C//DTD XHTML 1.1//EN"
+ xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd">
+<head>
+ <title>Frickeltimer Popup Launcher</title>
+</head>
+<body>
+<script type="text/javascript">/* <![CDATA[ */
+function launch() {
+	ft = window.open("countdown.html", "Frickeltimer", "toolbar=no,location=no,menubar=no,status=no,scrollbars=no,resizable=yes,width=360,height=120");
+	ft.focus();
+}
+/* ]]> */</script>
+<p><a href="#" onclick="launch()">Launch Frickeltimer in popup.</a></p>
+</body>
+</html>
