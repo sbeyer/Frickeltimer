@@ -30,6 +30,12 @@ div#frickeltimer {
 p {
 	margin: 3pt;
 }
+
+input {
+	border: #aaa 1px solid;
+	width: 2em;
+	text-align: center;
+}
 /* ]]> */</style>
 </head>
 <body>
@@ -38,22 +44,22 @@ p {
 </div>
 <form name="t1" action="">
 <p>
- <input type="text" size="1" name="m" />m
- <input type="text" size="1" name="s" />s
+ <input type="text" name="m" />m
+ <input type="text" name="s" />s
  <a href="#" onclick="stop(); startFrom(document.t1)">start</a>
 </p>
 </form>
 <form name="t2" action="">
 <p>
- <input type="text" size="1" name="m" />m
- <input type="text" size="1" name="s" />s
+ <input type="text" name="m" />m
+ <input type="text" name="s" />s
  <a href="#" onclick="stop(); startFrom(document.t2)">start</a>
 </p>
 </form>
 <form name="t3" action="">
 <p>
- <input type="text" size="1" name="m" />m
- <input type="text" size="1" name="s" />s
+ <input type="text" name="m" />m
+ <input type="text" name="s" />s
  <a href="#" onclick="stop(); startFrom(document.t3)">start</a>
 </p>
 </form>
