@@ -26,16 +26,44 @@ div#frickeltimer {
 	float: left;
 	margin: 10px 50px 10px 10px;
 }
+
+p {
+	margin: 3pt;
+}
 /* ]]> */</style>
 </head>
 <body>
 <div id="frickeltimer">
  -:--
 </div>
+<form name="t1" action="">
 <p>
+ <input type="text" size="1" name="m" />m
+ <input type="text" size="1" name="s" />s
+ <a href="#" onclick="stop(); startFrom(document.t1)">start</a>
+</p>
+</form>
+<form name="t2" action="">
+<p>
+ <input type="text" size="1" name="m" />m
+ <input type="text" size="1" name="s" />s
+ <a href="#" onclick="stop(); startFrom(document.t2)">start</a>
+</p>
+</form>
+<form name="t3" action="">
+<p>
+ <input type="text" size="1" name="m" />m
+ <input type="text" size="1" name="s" />s
+ <a href="#" onclick="stop(); startFrom(document.t3)">start</a>
+</p>
+</form>
+<p>
+<a href="#" onclick="stop(); start(10*60)">10m</a>
 <a href="#" onclick="stop(); start(5*60)">5m</a>
 <a href="#" onclick="stop(); start(3*60)">3m</a>
 <a href="#" onclick="stop(); start(60)">1m</a>
+</p>
+<p>
 <a href="#" onclick="stop();">stop</a>
 <a href="#" onclick="togglePause();">pause</a>
 </p>
@@ -84,10 +112,13 @@ function start(s) {
 	countdown();
 }
 
+function startFrom(el) {
+	start(60*el.m.value + 1*el.s.value);
+}
+
 function togglePause() {
 	pause = !pause;
 }
-
 /* ]]> */</script>
 </body>
 </html>
