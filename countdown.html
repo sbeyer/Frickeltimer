@@ -37,8 +37,10 @@ div#frickeltimer {
 <a href="#" onclick="stop(); start(3*60)">3m</a>
 <a href="#" onclick="stop(); start(60)">1m</a>
 <a href="#" onclick="stop();">stop</a>
+<a href="#" onclick="togglePause();">pause</a>
 </p>
 <script type="text/javascript">/* <![CDATA[ */
+var pause = true;
 var seconds = 0;
 var cnt = 10;
 var id = null;
@@ -53,11 +55,13 @@ function countdown()
 	document.getElementById('frickeltimer').firstChild.nodeValue = min+":"+sec;
 
 	if (seconds > 0) {
-		if (cnt == 0) {
-			seconds -= 1;
-			cnt = 10;
-		} else {
-			cnt -= 1;
+		if (!pause) {
+			if (cnt == 0) {
+				seconds -= 1;
+				cnt = 10;
+			} else {
+				cnt -= 1;
+			}
 		}
 		id = setTimeout("countdown()",100);
 	} else {
@@ -76,7 +80,12 @@ function stop() {
 function start(s) {
 	seconds = s;
 	cnt = 10;
+	pause = false;
 	countdown();
+}
+
+function togglePause() {
+	pause = !pause;
 }
 
 /* ]]> */</script>
