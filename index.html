@@ -50,62 +50,72 @@ function launch_indep()
 function launch()
 {
 	var ft = {
+		title: "Frickeltimer ["+(ftimers.length+1)+"]",
 		winref: window.open("timer.html", "Frickeltimer"+ftimers.length, "toolbar=no,location=no,menubar=no,status=no,scrollbars=no,resizable=yes,width=360,height=120"),
 		pause: true,
 		seconds: 0,
 		cnt: 10,
 		timer: null
 	}
+	ft.winref.document.title = ft.title;
 	ft.winref.focus();
 	var idx = ftimers.push(ft) - 1;
-	ft.winref.document.title = "Frickeltimer ["+idx+"]";
+
+	// helper functions for timercontrols
+	function timelink(minutes)
+	{
+		var x =
+		 [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+'); start('+idx+', '+minutes+'*60)'},
+		  [TEXT, minutes+'m']
+		 ];
+		return x;
+	}
+
+	function controlform()
+	{
+		var x =
+		 [TAG, 'form', {'name': 't'+idx, 'action': ''},
+		  [TAG, 'p', {},
+		   [TAG, 'input', {'type': 'text', 'name': 'm'}],
+		   [TEXT, 'm '],
+		   [TAG, 'input', {'type': 'text', 'name': 's'}],
+		   [TEXT, 's '],
+		   [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+'); startFrom('+idx+', document.t'+idx+')'},
+		    [TEXT, 'start']
+		   ]
+		  ]
+		 ];
+		return x;
+	}
 
 	// add timercontrols for ft
-	var subcontrols = [
-	 TAG, 'form', {'name': 't'+idx, 'action': ''},
-	 [TAG, 'p', {},
-	  [TAG, 'input', {'type': 'text', 'name': 'm'}],
-	  [TEXT, 'm '],
-	  [TAG, 'input', {'type': 'text', 'name': 's'}],
-	  [TEXT, 's '],
-	  [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+'); startFrom('+idx+', document.t'+idx+')'},
-	   [TEXT, 'start']
+	var controls =
+	 [TAG, 'div', {'id': 'timercontrol'+idx},
+	  [TAG, 'hr'],
+	  [TAG, 'h2', {},
+	   [TEXT, ft.title]
+	  ],
+	  controlform(),
+	  [TAG, 'p', {},
+	   timelink(10),
+	   [TEXT, ' '],
+	   timelink(5),
+	   [TEXT, ' '],
+	   timelink(3),
+	   [TEXT, ' '],
+	   timelink(1),
+	  ],
+	  [TAG, 'p', {},
+	   [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+');'},
+	    [TEXT, 'stop']
+	   ],
+	   [TEXT, ' '],
+	   [TAG, 'a', {'href': '#', 'onclick': 'togglePause('+idx+');'},
+	    [TEXT, 'pause']
+	   ]
 	  ]
-	 ]
-	];
-	var controls = [
-	 [TAG, 'hr'],
-	 subcontrols,
-	 [TAG, 'p', {},
-	  [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+'); start('+idx+', 10*60)'},
-	   [TEXT, '10m']
-	  ],
-	  [TEXT, ' '],
-	  [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+'); start('+idx+', 5*60)'},
-	   [TEXT, '5m']
-	  ],
-	  [TEXT, ' '],
-	  [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+'); start('+idx+', 3*60)'},
-	   [TEXT, '3m']
-	  ],
-	  [TEXT, ' '],
-	  [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+'); start('+idx+', 1*60)'},
-	   [TEXT, '1m']
-	  ]
-	 ],
-	 [TAG, 'p', {},
-	  [TAG, 'a', {'href': '#', 'onclick': 'stop('+idx+');'},
-	   [TEXT, 'stop']
-	  ],
-	  [TEXT, ' '],
-	  [TAG, 'a', {'href': '#', 'onclick': 'togglePause('+idx+');'},
-	   [TEXT, 'pause']
-	  ]
-	 ]
-	];
-	for (var i = 0; i < controls.length; i++) {
-		document.getElementById('timercontrols').appendChild(build_node(controls[i]));
-	}
+	 ];
+	document.getElementById('timercontrols').appendChild(build_node(controls));
 }
 
 function countdown(idx)
@@ -143,6 +153,7 @@ function stop(idx)
 
 function start(idx, s)
 {
+	ftimers[idx].winref.document.title = ftimers[idx].title;
 	ftimers[idx].seconds = s;
 	ftimers[idx].cnt = 10;
 	ftimers[idx].pause = false;
@@ -160,7 +171,11 @@ function togglePause(idx)
 }
 /* ]]> */</script>
 
-<p><a href="#" onclick="launch_indep()">Launch independent Frickeltimer in popup.</a></p>
+<h1>Frickeltimer</h1>
+
+<h2>Choose Frickeltimer version</h2>
+
+<p><a href="#" onclick="launch_indep()">Launch Frickeltimer in a popup window with independent controls.</a></p>
 
 <p><a href="#" onclick="launch()">Launch Frickeltimer in popup with controls below.</a></p>
 
