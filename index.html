@@ -43,22 +43,55 @@ function build_node(data)
 
 function launch_indep()
 {
-	var ft = window.open("countdown.html", "Frickeltimer", "toolbar=no,location=no,menubar=no,status=no,scrollbars=no,resizable=yes,width=360,height=120");
+	var ft = window.open("countdown.html", "Frickeltimer", "toolbar=no,location=no,menubar=no,status=no,scrollbars=no,resizable=yes,width=500,height=120");
 	ft.focus();
+}
+
+function focusControls(ev)
+{
+	document.getElementById(ev.currentTarget.name + 'controls').style.border = 'solid #f00 1px';
+}
+
+function blurControls(ev)
+{
+	document.getElementById(ev.currentTarget.name + 'controls').style.border = 'solid #777 1px';
+}
+
+function closeControls(ev)
+{
+	var controls = document.getElementById(ev.currentTarget.name + 'controls');
+	controls.parentNode.removeChild(controls);
+}
+
+function adjustFontSize(win)
+{
+	ft = win.document.getElementById('frickeltimer');
+	if (!ft) {
+		return;
+	}
+	ft.style.fontSize = (win.innerHeight*0.8)+'px';
+	if (win.document.width > win.innerWidth ||
+	    win.document.height > win.innerHeight) {
+		ratio = Math.min(win.innerWidth / win.document.width, win.innerHeight / win.document.height);
+		ft.style.fontSize = (ratio * parseInt(ft.style.fontSize) - 12) + 'px'
+	}
+}
+
+function adjustFontSizeHandle(ev)
+{
+	adjustFontSize(ev.currentTarget);
 }
 
 function launch()
 {
 	var ft = {
 		title: "Frickeltimer ["+(ftimers.length+1)+"]",
-		winref: window.open("timer.html", "Frickeltimer"+ftimers.length, "toolbar=no,location=no,menubar=no,status=no,scrollbars=no,resizable=yes,width=360,height=120"),
+		winref: window.open("timer.html", "timer"+ftimers.length, "toolbar=no,location=no,menubar=no,status=no,scrollbars=no,resizable=yes,width=360,height=120"),
 		pause: true,
 		seconds: 0,
 		cnt: 10,
 		timer: null
 	}
-	ft.winref.document.title = ft.title;
-	ft.winref.focus();
 	var idx = ftimers.push(ft) - 1;
 
 	// helper functions for timercontrols
@@ -90,7 +123,7 @@ function launch()
 
 	// add timercontrols for ft
 	var controls =
-	 [TAG, 'div', {'id': 'timercontrol'+idx, 'class': 'controls'},
+	 [TAG, 'div', {'id': 'timer'+idx+'controls', 'class': 'controls'},
 	  [TAG, 'h2', {},
 	   [TEXT, ft.title]
 	  ],
@@ -115,19 +148,28 @@ function launch()
 	  ]
 	 ];
 	document.getElementById('timercontrols').appendChild(build_node(controls));
+
+	ft.winref.onfocus = focusControls;
+	ft.winref.onblur = blurControls;
+	ft.winref.onclose = closeControls;
+	ft.winref.onresize = adjustFontSizeHandle;
+	adjustFontSize(ft.winref);
+	ft.winref.document.title = ft.title;
 }
 
 function check_window(idx)
 {
-	if (ftimers[idx].winref.document) {
-		return true; /* exists */
-	} else {
-		/* does not exist: remove controls */
+	if (!ftimers[idx]) {
+		return false;
+	}
+	if (ftimers[idx].winref.closed) {
+		/* closed: remove controls */
 		ftimers[idx] = null;
-		var controls = document.getElementById('timercontrol'+idx);
+		var controls = document.getElementById('timer'+idx+'controls');
 		controls.parentNode.removeChild(controls);
 		return false;
 	}
+	return true;
 }
 
 function countdown(idx)
@@ -140,7 +182,11 @@ function countdown(idx)
 	if (sec < 10) {
 		sec = "0"+sec;
 	}
-	ftimers[idx].winref.document.getElementById('frickeltimer').firstChild.nodeValue = min+":"+sec;
+	if (check_window(idx)) {
+		ftimers[idx].winref.document.getElementById('frickeltimer').firstChild.nodeValue = min+":"+sec;
+	} else {
+		return;
+	}
 
 	if (ftimers[idx].seconds > 0) {
 		if (!ftimers[idx].pause) {
@@ -183,6 +229,9 @@ function start(idx, s)
 
 function startFrom(idx, el)
 {
+	if (!check_window(idx)) {
+		return;
+	}
 	start(idx, 60*el.m.value + 1*el.s.value);
 }
 
@@ -199,9 +248,9 @@ function togglePause(idx)
 
 <h2>Choose Frickeltimer version</h2>
 
-<p><a href="#" onclick="launch_indep()">Launch Frickeltimer in a popup window with independent controls.</a></p>
+<p><a href="#" onclick="launch_indep()">Launch Frickeltimer in an independent popup window including controls.</a></p>
 
-<p><a href="#" onclick="launch()">Launch Frickeltimer in popup with controls below.</a></p>
+<p><a href="#" onclick="launch()">Launch Frickeltimer in a popup window but put controls below.</a></p>
 
 <div id="timercontrols"></div>
 
