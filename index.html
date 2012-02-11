@@ -117,8 +117,24 @@ function launch()
 	document.getElementById('timercontrols').appendChild(build_node(controls));
 }
 
+function check_window(idx)
+{
+	if (ftimers[idx].winref.document) {
+		return true; /* exists */
+	} else {
+		/* does not exist: remove controls */
+		ftimers[idx] = null;
+		var controls = document.getElementById('timercontrol'+idx);
+		controls.parentNode.removeChild(controls);
+		return false;
+	}
+}
+
 function countdown(idx)
 {
+	if (!check_window(idx)) {
+		return;
+	}
 	var sec = ftimers[idx].seconds % 60;
 	var min = (ftimers[idx].seconds-sec)/60;
 	if (sec < 10) {
@@ -143,6 +159,9 @@ function countdown(idx)
 
 function stop(idx)
 {
+	if (!check_window(idx)) {
+		return;
+	}
 	if (ftimers[idx].timer != null) {
 		clearTimeout(ftimers[idx].timer)
 	}
@@ -152,6 +171,9 @@ function stop(idx)
 
 function start(idx, s)
 {
+	if (!check_window(idx)) {
+		return;
+	}
 	ftimers[idx].winref.document.title = ftimers[idx].title;
 	ftimers[idx].seconds = s;
 	ftimers[idx].cnt = 10;
@@ -166,6 +188,9 @@ function startFrom(idx, el)
 
 function togglePause(idx)
 {
+	if (!check_window(idx)) {
+		return;
+	}
 	ftimers[idx].pause = !ftimers[idx].pause;
 }
 /* ]]> */</script>
