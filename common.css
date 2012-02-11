@@ -3,6 +3,16 @@ body {
 	background-color: #fff;
 }
 
+h1 {
+	font-size: 166%;
+	text-decoration: underline;
+}
+
+h2 {
+	font-size: 125%;
+	margin: 0 0 1ex 0;
+}
+
 a {
 	text-decoration: none;
 	color: #00f;
@@ -15,6 +25,13 @@ div#frickeltimer {
 	border: #aaa 2px solid;
 	float: left;
 	margin: 10px 50px 10px 10px;
+}
+
+div.controls {
+	border: 1px #777 solid;
+	margin: 10px;
+	padding: 3px;
+	float: left;
 }
 
 p {
