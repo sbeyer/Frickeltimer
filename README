@@ -2,7 +2,13 @@
 
 A simple JavaScript-based Countdown timer.
 
-Screenshot: http://p.twimg.com/AkSpTUDCQAAfqvn.png
+Can be used in action:
+ - http://sbeyer.github.com/Frickeltimer/
+ - Perhaps you have to activate JavaScript and allow popups.
+ - It is always the version on GitHub's master branch.
+
+Screenshot of the independent window version:
+	http://p.twimg.com/AkSpTUDCQAAfqvn.png
 
 
 == Why is this? ==
